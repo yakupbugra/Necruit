@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Necruit.Domain.Models;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
 
 namespace Necruit.Infrastructure.Data.Repository
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : Entity
     {
         public DbContext Context;
 
@@ -17,7 +18,7 @@ namespace Necruit.Infrastructure.Data.Repository
             this.dbSet = Context.Set<T>();
         }
 
-        public virtual T GetById(object id)
+        public virtual T FindById(object id)
         {
             return dbSet.Find(id);
         }
@@ -28,13 +29,18 @@ namespace Necruit.Infrastructure.Data.Repository
             return query;
         }
 
-        public IQueryable<T> GetBy(Expression<Func<T, bool>> filter)
+        public IQueryable<T> AllActives()
+        {
+            return FindBy(x => x.IsActive);
+        }
+
+        public IQueryable<T> FindBy(Expression<Func<T, bool>> filter)
         {
             IQueryable<T> query = dbSet.Where(filter);
             return query;
         }
 
-        public virtual IQueryable<T> GetBy(Expression<Func<T, bool>> filter, string includeProperties)
+        public virtual IQueryable<T> FindByInclude(Expression<Func<T, bool>> filter, string includeProperties)
         {
             IQueryable<T> query = dbSet;
             query = query.Where(filter);
@@ -66,5 +72,13 @@ namespace Necruit.Infrastructure.Data.Repository
         {
             Context.SaveChanges();
         }
+             
+        public IQueryable<T> FindActivesBy(Expression<Func<T, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
     }
 }

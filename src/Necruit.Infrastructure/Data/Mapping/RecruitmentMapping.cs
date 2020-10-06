@@ -13,7 +13,6 @@ namespace Necruit.Infrastructure.Data.Mapping
             builder.Property(x => x.IsActive).IsRequired();
             builder.Property(x => x.LastUpdateTime);
 
-            builder.Property(x => x.Stage);
             builder.HasMany(x => x.Interviews).WithOne(y => y.Recruitment);
 
         }

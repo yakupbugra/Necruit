@@ -6,20 +6,16 @@ namespace Necruit.Infrastructure.Data.Repository
 {
     public interface IGenericRepository<T> where T : class
     {
-        T GetById(object id);
-
+        T FindById(object id);
         IQueryable<T> All();
-
-        IQueryable<T> GetBy(Expression<Func<T, bool>> filter);
-
-        IQueryable<T> GetBy(Expression<Func<T, bool>> filter, string includeProperties);
+        IQueryable<T> AllActives();
+        IQueryable<T> FindBy(Expression<Func<T, bool>> filter);
+        IQueryable<T> FindActivesBy(Expression<Func<T, bool>> filter);
+        IQueryable<T> FindByInclude(Expression<Func<T, bool>> filter, string includeProperties);
 
         void Add(T entity);
-
         void Update(T entity);
-
         void Delete(object id);
-
         void Save();
     }
 }
