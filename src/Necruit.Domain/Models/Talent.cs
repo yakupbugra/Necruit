@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Necruit.Domain.Models
 {
@@ -13,13 +12,13 @@ namespace Necruit.Domain.Models
         public string MobilePhone { get; set; }
         public string Location { get; set; }
         public string Skype { get; set; }
-        public String Linkedin { get; set; }
+        public string Linkedin { get; set; }
         public int ExpectedSalary { get; set; }
         public string Cv { get; set; }
         public string Description { get; set; }
-        public User Owner { get; set; }
-   
         public bool IsInPool { get; set; }
+        public User Owner { get; set; }
+        public ICollection<Recruitment> Recruitments { get; set; }
 
     }
 }

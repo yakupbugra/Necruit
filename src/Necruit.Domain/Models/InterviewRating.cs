@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Necruit.Domain.Models
+﻿namespace Necruit.Domain.Models
 {
     public enum InterviewRating
     {

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Necruit.Domain.Models
+﻿namespace Necruit.Domain.Models
 {
-    public class InterviewFeedback:Entity
+    public class InterviewFeedback : Entity
     {
         public User User { get; set; }
         public string Comment { get; set; }

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Necruit.Domain.Models
 {
-    public class RecruitmentStage:Entity
+    public class RecruitmentStage : Entity
     {
         public string Name { get; set; }
         public int Order { get; set; }
-        public IEnumerable<Recruitment> Recruitments { get; set; }
+        public ICollection<Recruitment> Recruitments { get; set; }
     }
 }
