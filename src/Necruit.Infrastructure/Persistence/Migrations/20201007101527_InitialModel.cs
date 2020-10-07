@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
-namespace Necruit.Infrastructure.Migrations
+namespace Necruit.Infrastructure.Persistence.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,7 @@ namespace Necruit.Infrastructure.Migrations
                     Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     Order = table.Column<int>(type: "int", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -37,7 +37,7 @@ namespace Necruit.Infrastructure.Migrations
                     MobilePhone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     Location = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -56,7 +56,7 @@ namespace Necruit.Infrastructure.Migrations
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -89,7 +89,7 @@ namespace Necruit.Infrastructure.Migrations
                     IsInPool = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -113,7 +113,7 @@ namespace Necruit.Infrastructure.Migrations
                     JobId = table.Column<int>(type: "int", nullable: true),
                     StageId = table.Column<int>(type: "int", nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -150,7 +150,7 @@ namespace Necruit.Infrastructure.Migrations
                     Description = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true),
                     RecruitmentId = table.Column<int>(type: "int", nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -175,7 +175,7 @@ namespace Necruit.Infrastructure.Migrations
                     Rating = table.Column<int>(type: "int", nullable: false),
                     InterviewId = table.Column<int>(type: "int", nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>

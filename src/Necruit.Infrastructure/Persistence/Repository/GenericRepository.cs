@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Necruit.Domain.Models;
+using Necruit.Domain.Entities;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Necruit.Infrastructure.Data.Repository
+namespace Necruit.Infrastructure.Persistence.Repository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : Entity
     {
@@ -72,13 +72,10 @@ namespace Necruit.Infrastructure.Data.Repository
         {
             Context.SaveChanges();
         }
-             
+
         public IQueryable<T> FindActivesBy(Expression<Func<T, bool>> filter)
         {
             throw new NotImplementedException();
         }
-
-
-
     }
 }

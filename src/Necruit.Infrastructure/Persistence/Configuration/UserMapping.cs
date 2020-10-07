@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Necruit.Domain.Models;
+using Necruit.Domain.Entities;
 
-namespace Necruit.Infrastructure.Data.Mapping
+namespace Necruit.Infrastructure.Persistence.Configuration
 {
     public class UserMapping : IEntityTypeConfiguration<User>
     {

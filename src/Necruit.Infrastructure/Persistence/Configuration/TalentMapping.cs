@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Necruit.Domain.Models;
+using Necruit.Domain.Entities;
 
-namespace Necruit.Infrastructure.Data.Mapping
+namespace Necruit.Infrastructure.Persistence.Configuration
 {
     public class TalentMapping : IEntityTypeConfiguration<Talent>
     {
@@ -12,7 +12,6 @@ namespace Necruit.Infrastructure.Data.Mapping
             builder.Property(x => x.CreateTime).IsRequired();
             builder.Property(x => x.IsActive).IsRequired();
             builder.Property(x => x.LastUpdateTime);
-
 
             builder.Property(x => x.Cv).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(4000);
@@ -26,9 +25,7 @@ namespace Necruit.Infrastructure.Data.Mapping
             builder.Property(x => x.Surname).IsRequired().HasMaxLength(250);
             builder.Property(x => x.Skype).HasMaxLength(250);
 
-
             builder.HasMany(x => x.Recruitments).WithOne(x => x.Talent).HasForeignKey("TalentId");
-
         }
     }
 }

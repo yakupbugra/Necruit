@@ -14,8 +14,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Necruit.Client\Necruit.Client.csproj" />
-    <ProjectReference Include="..\Necruit.Infrastructure\Necruit.Infrastructure.csproj" />
     <ProjectReference Include="..\Necruit.Shared\Necruit.Shared.csproj" />
+    <ProjectReference Include="..\Necurit.Application\Necurit.Application.csproj" />
   </ItemGroup>
 
 

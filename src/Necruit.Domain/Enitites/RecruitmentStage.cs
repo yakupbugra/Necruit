@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Necruit.Domain.Models
+namespace Necruit.Domain.Entities
 {
     public class RecruitmentStage : Entity
     {

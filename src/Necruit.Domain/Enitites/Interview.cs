@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Necruit.Domain.Models
+namespace Necruit.Domain.Entities
 {
     public class Interview : Entity
     {

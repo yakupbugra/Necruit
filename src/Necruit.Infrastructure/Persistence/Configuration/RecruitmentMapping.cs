@@ -1,19 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Necruit.Domain.Models;
+using Necruit.Domain.Entities;
 
-namespace Necruit.Infrastructure.Data.Mapping
+namespace Necruit.Infrastructure.Persistence.Configuration
 {
-    public class InterviewFeedbackMapping : IEntityTypeConfiguration<InterviewFeedback>
+    public class RecruitmentMapping : IEntityTypeConfiguration<Recruitment>
     {
-        public void Configure(EntityTypeBuilder<InterviewFeedback> builder)
+        public void Configure(EntityTypeBuilder<Recruitment> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.CreateTime).IsRequired();
             builder.Property(x => x.IsActive).IsRequired();
             builder.Property(x => x.LastUpdateTime);
 
-            builder.Property(x => x.Rating);
+            builder.HasMany(x => x.Interviews).WithOne(y => y.Recruitment);
         }
     }
 }

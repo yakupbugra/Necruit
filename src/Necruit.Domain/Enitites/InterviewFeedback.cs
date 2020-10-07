@@ -1,4 +1,6 @@
-﻿namespace Necruit.Domain.Models
+﻿using Necruit.Domain.Enums;
+
+namespace Necruit.Domain.Entities
 {
     public class InterviewFeedback : Entity
     {

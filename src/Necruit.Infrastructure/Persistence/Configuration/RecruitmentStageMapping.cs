@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Necruit.Domain.Models;
+using Necruit.Domain.Entities;
 
-namespace Necruit.Infrastructure.Data.Mapping
+namespace Necruit.Infrastructure.Persistence.Configuration
 {
     public class RecruitmentStageMapping : IEntityTypeConfiguration<RecruitmentStage>
     {
@@ -16,8 +16,6 @@ namespace Necruit.Infrastructure.Data.Mapping
             builder.Property(x => x.Name).IsRequired().HasMaxLength(250);
             builder.Property(x => x.Order).IsRequired();
             builder.HasMany(x => x.Recruitments).WithOne(x => x.Stage).HasForeignKey("StageId");
-
-
         }
     }
 }

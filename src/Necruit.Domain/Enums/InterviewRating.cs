@@ -1,4 +1,4 @@
-﻿namespace Necruit.Domain.Models
+﻿namespace Necruit.Domain.Enums
 {
     public enum InterviewRating
     {

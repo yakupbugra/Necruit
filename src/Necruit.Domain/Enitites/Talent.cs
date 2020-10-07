@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace Necruit.Domain.Models
+namespace Necruit.Domain.Entities
 {
     public class Talent : Entity
     {
-
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
@@ -18,6 +17,5 @@ namespace Necruit.Domain.Models
         public bool IsInPool { get; set; }
         public User Owner { get; set; }
         public ICollection<Recruitment> Recruitments { get; set; }
-
     }
 }

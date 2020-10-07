@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Exceptions\" />
+    <ProjectReference Include="..\Necruit.Domain\Necruit.Domain.csproj" />
+    <ProjectReference Include="..\Necruit.Infrastructure\Necruit.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

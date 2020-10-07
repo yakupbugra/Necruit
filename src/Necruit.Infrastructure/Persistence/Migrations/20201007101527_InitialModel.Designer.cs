@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Necruit.Infrastructure.Data.Mapping;
+using Necruit.Infrastructure.Persistence.Configuration;
 
-namespace Necruit.Infrastructure.Migrations
+namespace Necruit.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(NecruitDbContext))]
-    partial class NecruitDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201007101527_InitialModel")]
+    partial class InitialModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +36,7 @@ namespace Necruit.Infrastructure.Migrations
                     b.ToTable("InterviewUser");
                 });
 
-            modelBuilder.Entity("Necruit.Domain.Models.Interview", b =>
+            modelBuilder.Entity("Necruit.Domain.Entities.Interview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -54,7 +56,7 @@ namespace Necruit.Infrastructure.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("LastUpdateTime")
+                    b.Property<DateTime?>("LastUpdateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("RecruitmentId")
@@ -70,7 +72,7 @@ namespace Necruit.Infrastructure.Migrations
                     b.ToTable("Interview");
                 });
 
-            modelBuilder.Entity("Necruit.Domain.Models.InterviewFeedback", b =>
+            modelBuilder.Entity("Necruit.Domain.Entities.InterviewFeedback", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -89,7 +91,7 @@ namespace Necruit.Infrastructure.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("LastUpdateTime")
+                    b.Property<DateTime?>("LastUpdateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Rating")
@@ -107,7 +109,7 @@ namespace Necruit.Infrastructure.Migrations
                     b.ToTable("InterviewFeedback");
                 });
 
-            modelBuilder.Entity("Necruit.Domain.Models.Job", b =>
+            modelBuilder.Entity("Necruit.Domain.Entities.Job", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -123,7 +125,7 @@ namespace Necruit.Infrastructure.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("LastUpdateTime")
+                    b.Property<DateTime?>("LastUpdateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Quantity")
@@ -144,7 +146,7 @@ namespace Necruit.Infrastructure.Migrations
                     b.ToTable("Job");
                 });
 
-            modelBuilder.Entity("Necruit.Domain.Models.Recruitment", b =>
+            modelBuilder.Entity("Necruit.Domain.Entities.Recruitment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -160,7 +162,7 @@ namespace Necruit.Infrastructure.Migrations
                     b.Property<int?>("JobId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("LastUpdateTime")
+                    b.Property<DateTime?>("LastUpdateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("StageId")
@@ -180,7 +182,7 @@ namespace Necruit.Infrastructure.Migrations
                     b.ToTable("Recruitment");
                 });
 
-            modelBuilder.Entity("Necruit.Domain.Models.RecruitmentStage", b =>
+            modelBuilder.Entity("Necruit.Domain.Entities.RecruitmentStage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -193,7 +195,7 @@ namespace Necruit.Infrastructure.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("LastUpdateTime")
+                    b.Property<DateTime?>("LastUpdateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -209,7 +211,7 @@ namespace Necruit.Infrastructure.Migrations
                     b.ToTable("RecruitmentStage");
                 });
 
-            modelBuilder.Entity("Necruit.Domain.Models.Talent", b =>
+            modelBuilder.Entity("Necruit.Domain.Entities.Talent", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -241,7 +243,7 @@ namespace Necruit.Infrastructure.Migrations
                     b.Property<bool>("IsInPool")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("LastUpdateTime")
+                    b.Property<DateTime?>("LastUpdateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Linkedin")
@@ -280,7 +282,7 @@ namespace Necruit.Infrastructure.Migrations
                     b.ToTable("Talent");
                 });
 
-            modelBuilder.Entity("Necruit.Domain.Models.User", b =>
+            modelBuilder.Entity("Necruit.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -298,7 +300,7 @@ namespace Necruit.Infrastructure.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("LastUpdateTime")
+                    b.Property<DateTime?>("LastUpdateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Location")
@@ -331,35 +333,35 @@ namespace Necruit.Infrastructure.Migrations
 
             modelBuilder.Entity("InterviewUser", b =>
                 {
-                    b.HasOne("Necruit.Domain.Models.Interview", null)
+                    b.HasOne("Necruit.Domain.Entities.Interview", null)
                         .WithMany()
                         .HasForeignKey("InterviewsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Necruit.Domain.Models.User", null)
+                    b.HasOne("Necruit.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Necruit.Domain.Models.Interview", b =>
+            modelBuilder.Entity("Necruit.Domain.Entities.Interview", b =>
                 {
-                    b.HasOne("Necruit.Domain.Models.Recruitment", "Recruitment")
+                    b.HasOne("Necruit.Domain.Entities.Recruitment", "Recruitment")
                         .WithMany("Interviews")
                         .HasForeignKey("RecruitmentId");
 
                     b.Navigation("Recruitment");
                 });
 
-            modelBuilder.Entity("Necruit.Domain.Models.InterviewFeedback", b =>
+            modelBuilder.Entity("Necruit.Domain.Entities.InterviewFeedback", b =>
                 {
-                    b.HasOne("Necruit.Domain.Models.Interview", "Interview")
+                    b.HasOne("Necruit.Domain.Entities.Interview", "Interview")
                         .WithMany("InterviewFeedbacks")
                         .HasForeignKey("InterviewId");
 
-                    b.HasOne("Necruit.Domain.Models.User", "User")
+                    b.HasOne("Necruit.Domain.Entities.User", "User")
                         .WithMany("InterviewFeedbacks")
                         .HasForeignKey("UserId");
 
@@ -368,26 +370,26 @@ namespace Necruit.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Necruit.Domain.Models.Job", b =>
+            modelBuilder.Entity("Necruit.Domain.Entities.Job", b =>
                 {
-                    b.HasOne("Necruit.Domain.Models.User", "User")
+                    b.HasOne("Necruit.Domain.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Necruit.Domain.Models.Recruitment", b =>
+            modelBuilder.Entity("Necruit.Domain.Entities.Recruitment", b =>
                 {
-                    b.HasOne("Necruit.Domain.Models.Job", "Job")
+                    b.HasOne("Necruit.Domain.Entities.Job", "Job")
                         .WithMany("Recruitments")
                         .HasForeignKey("JobId");
 
-                    b.HasOne("Necruit.Domain.Models.RecruitmentStage", "Stage")
+                    b.HasOne("Necruit.Domain.Entities.RecruitmentStage", "Stage")
                         .WithMany("Recruitments")
                         .HasForeignKey("StageId");
 
-                    b.HasOne("Necruit.Domain.Models.Talent", "Talent")
+                    b.HasOne("Necruit.Domain.Entities.Talent", "Talent")
                         .WithMany("Recruitments")
                         .HasForeignKey("TalentId");
 
@@ -398,41 +400,41 @@ namespace Necruit.Infrastructure.Migrations
                     b.Navigation("Talent");
                 });
 
-            modelBuilder.Entity("Necruit.Domain.Models.Talent", b =>
+            modelBuilder.Entity("Necruit.Domain.Entities.Talent", b =>
                 {
-                    b.HasOne("Necruit.Domain.Models.User", "Owner")
+                    b.HasOne("Necruit.Domain.Entities.User", "Owner")
                         .WithMany("Talents")
                         .HasForeignKey("UserId");
 
                     b.Navigation("Owner");
                 });
 
-            modelBuilder.Entity("Necruit.Domain.Models.Interview", b =>
+            modelBuilder.Entity("Necruit.Domain.Entities.Interview", b =>
                 {
                     b.Navigation("InterviewFeedbacks");
                 });
 
-            modelBuilder.Entity("Necruit.Domain.Models.Job", b =>
+            modelBuilder.Entity("Necruit.Domain.Entities.Job", b =>
                 {
                     b.Navigation("Recruitments");
                 });
 
-            modelBuilder.Entity("Necruit.Domain.Models.Recruitment", b =>
+            modelBuilder.Entity("Necruit.Domain.Entities.Recruitment", b =>
                 {
                     b.Navigation("Interviews");
                 });
 
-            modelBuilder.Entity("Necruit.Domain.Models.RecruitmentStage", b =>
+            modelBuilder.Entity("Necruit.Domain.Entities.RecruitmentStage", b =>
                 {
                     b.Navigation("Recruitments");
                 });
 
-            modelBuilder.Entity("Necruit.Domain.Models.Talent", b =>
+            modelBuilder.Entity("Necruit.Domain.Entities.Talent", b =>
                 {
                     b.Navigation("Recruitments");
                 });
 
-            modelBuilder.Entity("Necruit.Domain.Models.User", b =>
+            modelBuilder.Entity("Necruit.Domain.Entities.User", b =>
                 {
                     b.Navigation("InterviewFeedbacks");
 
