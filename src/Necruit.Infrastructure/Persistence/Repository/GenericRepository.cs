@@ -39,19 +39,6 @@ namespace Necruit.Infrastructure.Persistence.Repository
             IQueryable<T> query = dbSet.Where(filter);
             return query;
         }
-
-        public virtual IQueryable<T> FindByInclude(Expression<Func<T, bool>> filter, string includeProperties)
-        {
-            IQueryable<T> query = dbSet;
-            query = query.Where(filter);
-
-            foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-            {
-                query = query.Include(includeProperty);
-            }
-            return query;
-        }
-
         public virtual void Add(T entity)
         {
             dbSet.Add(entity);

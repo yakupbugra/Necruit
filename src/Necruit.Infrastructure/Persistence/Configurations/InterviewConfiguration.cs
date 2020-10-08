@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Necruit.Domain.Entities;
 
-namespace Necruit.Infrastructure.Persistence.Configuration
+namespace Necruit.Infrastructure.Persistence.Configurations
 {
-    public class InterviewMapping : IEntityTypeConfiguration<Interview>
+    public class InterviewConfiguration : IEntityTypeConfiguration<Interview>
     {
         public void Configure(EntityTypeBuilder<Interview> builder)
         {

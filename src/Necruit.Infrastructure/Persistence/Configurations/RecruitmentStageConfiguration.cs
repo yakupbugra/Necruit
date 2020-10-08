@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Necruit.Domain.Entities;
 
-namespace Necruit.Infrastructure.Persistence.Configuration
+namespace Necruit.Infrastructure.Persistence.Configurations
 {
-    public class RecruitmentStageMapping : IEntityTypeConfiguration<RecruitmentStage>
+    public class RecruitmentStageConfiguration : IEntityTypeConfiguration<RecruitmentStage>
     {
         public void Configure(EntityTypeBuilder<RecruitmentStage> builder)
         {

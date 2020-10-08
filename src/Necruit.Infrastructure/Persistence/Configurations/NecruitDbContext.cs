@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Necruit.Infrastructure.Persistence.Configuration
+namespace Necruit.Infrastructure.Persistence.Configurations
 {
     public class NecruitDbContext : DbContext
     {

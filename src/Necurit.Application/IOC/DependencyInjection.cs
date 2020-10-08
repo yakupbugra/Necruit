@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Necruit.Infrastructure.Persistence.Configuration;
+using Necruit.Infrastructure.Persistence.Configurations;
+using Necruit.Infrastructure.Persistence.Repository;
 
 namespace Necruit.Application.IOC
 {
@@ -14,7 +15,8 @@ namespace Necruit.Application.IOC
             b => b.MigrationsAssembly(typeof(NecruitDbContext).Assembly.FullName)));
 
             services.AddScoped<DbContext>(provider => provider.GetService<NecruitDbContext>());
-
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>)); 
+            
             return services;
         }
     }

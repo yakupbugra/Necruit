@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Necruit.Domain.Entities;
 
-namespace Necruit.Infrastructure.Persistence.Configuration
+namespace Necruit.Infrastructure.Persistence.Configurations
 {
-    public class JobMapping : IEntityTypeConfiguration<Job>
+    public class JobConfiguration : IEntityTypeConfiguration<Job>
     {
         public void Configure(EntityTypeBuilder<Job> builder)
         {

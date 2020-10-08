@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Necruit.Client", "Necruit.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Necruit.Shared", "Necruit.Shared\Necruit.Shared.csproj", "{3829B263-3245-4D29-B057-B62B38D8DA9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Necurit.Application", "Necurit.Application\Necurit.Application.csproj", "{AD9EE5EC-101E-4D4E-B6FA-002DF83575B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Necurit.Application", "Necurit.Application\Necurit.Application.csproj", "{AD9EE5EC-101E-4D4E-B6FA-002DF83575B6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{A4FB858C-00F6-4FF3-9B04-AFDF1C0ED1E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +50,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F73D91E7-53B2-446D-8A02-695FD8EE206D} = {A4FB858C-00F6-4FF3-9B04-AFDF1C0ED1E0}
+		{7A11EC6C-A4E2-4F15-9394-9EFCD458DA88} = {A4FB858C-00F6-4FF3-9B04-AFDF1C0ED1E0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {770386DE-2F45-4925-8406-7BC673628259}
