@@ -21,9 +21,9 @@ namespace Necruit.Server.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ServiceResult<List<JobListResponse>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return jobService.ListJobs();
         }
 
         [HttpGet("{id}")]
