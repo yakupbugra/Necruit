@@ -4,6 +4,10 @@ namespace Necruit.Domain.Entities
 {
     public class Talent : Entity
     {
+        public Talent() : base()
+        {
+        }
+
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }

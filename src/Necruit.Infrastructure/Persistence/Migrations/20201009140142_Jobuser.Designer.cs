@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Necruit.Infrastructure.Persistence.Configurations;
 
 namespace Necruit.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(NecruitDbContext))]
-    partial class NecruitDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201009140142_Jobuser")]
+    partial class Jobuser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -134,7 +136,7 @@ namespace Necruit.Infrastructure.Persistence.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -157,7 +159,7 @@ namespace Necruit.Infrastructure.Persistence.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<int>("JobId")
+                    b.Property<int?>("JobId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("LastUpdateTime")
@@ -332,7 +334,7 @@ namespace Necruit.Infrastructure.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateTime = new DateTime(2020, 10, 9, 17, 5, 56, 237, DateTimeKind.Local).AddTicks(4985),
+                            CreateTime = new DateTime(2020, 10, 9, 17, 1, 41, 723, DateTimeKind.Local).AddTicks(8087),
                             Email = "admin@admin.com",
                             IsActive = true,
                             Location = "Turkey",
@@ -385,9 +387,7 @@ namespace Necruit.Infrastructure.Persistence.Migrations
                 {
                     b.HasOne("Necruit.Domain.Entities.User", "User")
                         .WithMany("Jobs")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
@@ -396,9 +396,7 @@ namespace Necruit.Infrastructure.Persistence.Migrations
                 {
                     b.HasOne("Necruit.Domain.Entities.Job", "Job")
                         .WithMany("Recruitments")
-                        .HasForeignKey("JobId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("JobId");
 
                     b.HasOne("Necruit.Domain.Entities.RecruitmentStage", "Stage")
                         .WithMany("Recruitments")

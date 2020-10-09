@@ -4,6 +4,10 @@ namespace Necruit.Domain.Entities
 {
     public class User : Entity
     {
+        public User() : base()
+        {
+        }
+
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
@@ -12,6 +16,7 @@ namespace Necruit.Domain.Entities
         public string Location { get; set; }
         public ICollection<Interview> Interviews { get; set; }
         public ICollection<InterviewFeedback> InterviewFeedbacks { get; set; }
-        public List<Talent> Talents { get; set; }
+        public ICollection<Talent> Talents { get; set; }
+        public ICollection<Job> Jobs { get; set; }
     }
 }

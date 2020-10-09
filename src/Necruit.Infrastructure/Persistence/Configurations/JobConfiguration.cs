@@ -15,7 +15,7 @@ namespace Necruit.Infrastructure.Persistence.Configurations
 
             builder.Property(x => x.Quantity).IsRequired();
             builder.Property(x => x.Title).IsRequired().HasMaxLength(250);
-            builder.HasMany(x => x.Recruitments).WithOne(x => x.Job).HasForeignKey("JobId");
+            builder.HasMany(x => x.Recruitments).WithOne(x => x.Job).HasForeignKey("JobId").IsRequired();
         }
     }
 }

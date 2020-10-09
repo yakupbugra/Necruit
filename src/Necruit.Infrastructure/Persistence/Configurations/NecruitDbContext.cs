@@ -32,6 +32,8 @@ namespace Necruit.Infrastructure.Persistence.Configurations
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             base.OnModelCreating(builder);
+
+            builder.Entity<User>().HasData(new User { Id = 1, Email = "admin@admin.com", Location = "Turkey", Name = "admin", Surname = "admin", Password = "1234" });
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

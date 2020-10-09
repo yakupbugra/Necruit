@@ -4,6 +4,10 @@ namespace Necruit.Domain.Entities
 {
     public class Job : Entity
     {
+        public Job() : base()
+        {
+        }
+
         public string Title { get; set; }
         public string Definition { get; set; }
         public int Quantity { get; set; }

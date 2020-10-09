@@ -5,6 +5,10 @@ namespace Necruit.Domain.Entities
 {
     public class Interview : Entity
     {
+        public Interview() : base()
+        {
+        }
+
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public String Description { get; set; }

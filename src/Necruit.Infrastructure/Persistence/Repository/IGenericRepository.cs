@@ -15,6 +15,7 @@ namespace Necruit.Infrastructure.Persistence.Repository
         IQueryable<T> FindBy(Expression<Func<T, bool>> filter);
 
         IQueryable<T> FindActivesBy(Expression<Func<T, bool>> filter);
+
         void Add(T entity);
 
         void Update(T entity);

@@ -39,6 +39,7 @@ namespace Necruit.Infrastructure.Persistence.Repository
             IQueryable<T> query = dbSet.Where(filter);
             return query;
         }
+
         public virtual void Add(T entity)
         {
             dbSet.Add(entity);

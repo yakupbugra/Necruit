@@ -7,15 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Necruit.Domain", "Necruit.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Necruit.Infrastructure", "Necruit.Infrastructure\Necruit.Infrastructure.csproj", "{156217F5-9995-47B3-8115-AE83353BF654}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Necruit.Server", "Necruit.Server\Necruit.Server.csproj", "{F73D91E7-53B2-446D-8A02-695FD8EE206D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Necruit.Client", "Necruit.Client\Necruit.Client.csproj", "{7A11EC6C-A4E2-4F15-9394-9EFCD458DA88}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Necruit.Shared", "Necruit.Shared\Necruit.Shared.csproj", "{3829B263-3245-4D29-B057-B62B38D8DA9F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Necurit.Application", "Necurit.Application\Necurit.Application.csproj", "{AD9EE5EC-101E-4D4E-B6FA-002DF83575B6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{A4FB858C-00F6-4FF3-9B04-AFDF1C0ED1E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Necruit.Api", "Necruit.Api\Necruit.Api.csproj", "{28BDF5E1-B157-4788-81B4-8D5609F60BDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,29 +27,20 @@ Global
 		{156217F5-9995-47B3-8115-AE83353BF654}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{156217F5-9995-47B3-8115-AE83353BF654}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{156217F5-9995-47B3-8115-AE83353BF654}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F73D91E7-53B2-446D-8A02-695FD8EE206D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F73D91E7-53B2-446D-8A02-695FD8EE206D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F73D91E7-53B2-446D-8A02-695FD8EE206D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F73D91E7-53B2-446D-8A02-695FD8EE206D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7A11EC6C-A4E2-4F15-9394-9EFCD458DA88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A11EC6C-A4E2-4F15-9394-9EFCD458DA88}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A11EC6C-A4E2-4F15-9394-9EFCD458DA88}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A11EC6C-A4E2-4F15-9394-9EFCD458DA88}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3829B263-3245-4D29-B057-B62B38D8DA9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3829B263-3245-4D29-B057-B62B38D8DA9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3829B263-3245-4D29-B057-B62B38D8DA9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3829B263-3245-4D29-B057-B62B38D8DA9F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AD9EE5EC-101E-4D4E-B6FA-002DF83575B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AD9EE5EC-101E-4D4E-B6FA-002DF83575B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD9EE5EC-101E-4D4E-B6FA-002DF83575B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD9EE5EC-101E-4D4E-B6FA-002DF83575B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28BDF5E1-B157-4788-81B4-8D5609F60BDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28BDF5E1-B157-4788-81B4-8D5609F60BDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28BDF5E1-B157-4788-81B4-8D5609F60BDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28BDF5E1-B157-4788-81B4-8D5609F60BDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{F73D91E7-53B2-446D-8A02-695FD8EE206D} = {A4FB858C-00F6-4FF3-9B04-AFDF1C0ED1E0}
-		{7A11EC6C-A4E2-4F15-9394-9EFCD458DA88} = {A4FB858C-00F6-4FF3-9B04-AFDF1C0ED1E0}
+		{28BDF5E1-B157-4788-81B4-8D5609F60BDD} = {A4FB858C-00F6-4FF3-9B04-AFDF1C0ED1E0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {770386DE-2F45-4925-8406-7BC673628259}

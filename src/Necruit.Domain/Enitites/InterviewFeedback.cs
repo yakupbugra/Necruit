@@ -4,6 +4,10 @@ namespace Necruit.Domain.Entities
 {
     public class InterviewFeedback : Entity
     {
+        public InterviewFeedback() : base()
+        {
+        }
+
         public User User { get; set; }
         public string Comment { get; set; }
         public InterviewRating Rating { get; set; }

@@ -24,6 +24,7 @@ namespace Necruit.Infrastructure.Persistence.Configurations
             builder.HasMany(x => x.InterviewFeedbacks).WithOne(x => x.User).HasForeignKey("UserId");
             builder.HasMany(x => x.Talents).WithOne(x => x.Owner).HasForeignKey("UserId");
             builder.HasMany(x => x.Interviews).WithMany(x => x.Users);
+            builder.HasMany(x => x.Jobs).WithOne(x => x.User).HasForeignKey("UserId").IsRequired();
         }
     }
 }
