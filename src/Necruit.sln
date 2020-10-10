@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Necruit.Domain", "Necruit.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Necruit.Infrastructure", "Necruit.Infrastructure\Necruit.Infrastructure.csproj", "{156217F5-9995-47B3-8115-AE83353BF654}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Necurit.Application", "Necurit.Application\Necurit.Application.csproj", "{AD9EE5EC-101E-4D4E-B6FA-002DF83575B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Necruit.Application", "Necruit.Application\Necruit.Application.csproj", "{AD9EE5EC-101E-4D4E-B6FA-002DF83575B6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Necruit.Api", "Necruit.Api\Necruit.Api.csproj", "{28BDF5E1-B157-4788-81B4-8D5609F60BDD}"
 EndProject

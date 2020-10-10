@@ -1,6 +1,9 @@
-﻿namespace Necurit.Application.Data.Request
+﻿using Necruit.Domain.Entities;
+using Necruit.Application.Mapping;
+
+namespace Necruit.Application.Request
 {
-    public class CreateJobRequest
+    public class CreateJobRequest:MapTo<Job>
     {
         public string Title { get; set; }
         public string Definition { get; set; }

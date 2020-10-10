@@ -1,13 +1,12 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Necruit.Api.Configuration;
 using Necruit.Application.IOC;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Serilog;
 
 namespace Necruit.Api
 {
@@ -25,7 +24,7 @@ namespace Necruit.Api
         {
             services.AddControllers().AddJsonOptions(jsonOptions =>
             {
-                jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null//JsonNamingPolicy.CamelCase;
+                jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;//JsonNamingPolicy.CamelCase;
             });
             services.AddSwaggerGen(c =>
             {
@@ -35,8 +34,6 @@ namespace Necruit.Api
             services.AddLogging();
             services.AddInfrastructure(Configuration);
             services.AddServices(Configuration);
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +46,11 @@ namespace Necruit.Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Necruit.Api v1"));
             }
 
+            app.UseMiddleware<CorrelationMiddleware>();
+            //app.UseSerilogRequestLogging();
+
+            app.UseMiddleware<LogRequestMiddleware>();
+            app.UseMiddleware<LogResponseMiddleware>();
             app.UseHttpsRedirection();
 
             app.UseRouting();

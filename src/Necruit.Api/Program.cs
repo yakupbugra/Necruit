@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Events;
 using System;
 
 namespace Necruit.Api
@@ -11,31 +13,68 @@ namespace Necruit.Api
     {
         public static void Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
+            // Log.Logger = new LoggerConfiguration()
+            //     .MinimumLevel.Debug()
+            //.MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+            //.Enrich.FromLogContext()
+            //.WriteTo.Console(outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}")
+            //.CreateLogger();
 
-            using (var scope = host.Services.CreateScope())
+            // Log.Logger = new LoggerConfiguration().WriteTo.Console(theme: AnsiConsoleTheme.Code).CreateLogger();
+
+            // Log.Logger = new LoggerConfiguration()
+            //.MinimumLevel.Debug()m
+            //.MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+            //.Enrich.FromLogContext()
+            //.WriteTo.Console()
+            //.CreateLogger();
+
+            Log.Logger = new LoggerConfiguration()
+          .MinimumLevel.Information()
+          .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
+          .MinimumLevel.Override("System", LogEventLevel.Warning)
+                .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+          .Enrich.FromLogContext()
+          .WriteTo.Console(outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level}] {CorrelationId} - {Message}{NewLine}{Exception}")
+          .CreateLogger();
+
+            try
             {
-                var services = scope.ServiceProvider;
-                try
+                Log.Information("Starting up");
+                var host = CreateHostBuilder(args).Build();
+
+                using (var scope = host.Services.CreateScope())
                 {
+                    var services = scope.ServiceProvider;
                     var context = services.GetRequiredService<DbContext>();
                     context.Database.Migrate();
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred while seeding the atabase.");
-                }
-            }
 
-            host.Run();
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                }
+
+                host.Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Application start-up failed");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+            Host.CreateDefaultBuilder(args).UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+        //    (hostingContext, services, loggerConfiguration) => loggerConfiguration
+        //                                              .ReadFrom.Configuration(hostingContext.Configuration)
+        //                                              .Enrich.FromLogContext()
+        //                                              .WriteTo.Debug()
+        //                                              .WriteTo.Console(outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}")
     }
 }

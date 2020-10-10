@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.Extensions.Logging;
+using Necruit.Application.Request;
 using Necruit.Domain.Entities;
 using Necruit.Infrastructure.Persistence.Repository;
-using Necurit.Application.Data.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Necurit.Application.Data.Service
+namespace Necruit.Application.Service.Jobs
 {
     public class JobService : ServiceBase, IJobService
     {
@@ -36,7 +36,6 @@ namespace Necurit.Application.Data.Service
                 Job job = mapper.Map<Job>(request);
                 job.User = userRepository.FindById(request.UserId);
 
-
                 jobRepository.Add(job);
                 jobRepository.Save();
 
@@ -51,13 +50,13 @@ namespace Necurit.Application.Data.Service
             return result;
         }
 
-        public ServiceResult<List<JobListResponse>> ListJobs()
+        public ServiceResult<List<JobInfo>> ListJobs()
         {
-            ServiceResult<List<JobListResponse>> result = new ServiceResult<List<JobListResponse>>();
+            ServiceResult<List<JobInfo>> result = new ServiceResult<List<JobInfo>>();
 
             try
             {
-                result.Data = jobRepository.AllActives().ProjectTo<JobListResponse>(mapper.ConfigurationProvider).ToList();
+                result.Data = jobRepository.AllActives().ProjectTo<JobInfo>(mapper.ConfigurationProvider).ToList();
             }
             catch (Exception ex)
             {

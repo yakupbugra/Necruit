@@ -4,8 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Necruit.Infrastructure.Persistence.Configurations;
 using Necruit.Infrastructure.Persistence.Repository;
-using Necurit.Application.Data.Mapping;
-using Necurit.Application.Data.Service;
+using Necruit.Application.Service.Jobs;
 using System.Reflection;
 
 namespace Necruit.Application.IOC
@@ -26,7 +25,7 @@ namespace Necruit.Application.IOC
 
         public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddAutoMapper(Assembly.GetAssembly(typeof(JobMapper)));
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddScoped<IJobService, JobService>();
 
             return services;

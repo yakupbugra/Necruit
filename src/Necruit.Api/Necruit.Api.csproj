@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
+
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,11 +11,14 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0-rc.1.20451.14" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.4.1-dev-00180" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="System.IO" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Necurit.Application\Necurit.Application.csproj" />
+    <ProjectReference Include="..\Necruit.Application\Necruit.Application.csproj" />
   </ItemGroup>
 
 </Project>

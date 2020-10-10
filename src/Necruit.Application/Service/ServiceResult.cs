@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Necurit.Application
+namespace Necruit.Application.Service
 {
     public class ServiceResult
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace Necurit.Application
+namespace Necruit.Application.Service
 {
     public class ServiceBase
     {

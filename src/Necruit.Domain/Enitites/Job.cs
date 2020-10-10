@@ -13,5 +13,6 @@ namespace Necruit.Domain.Entities
         public int Quantity { get; set; }
         public ICollection<Recruitment> Recruitments { get; set; }
         public User User { get; set; }
+
     }
 }

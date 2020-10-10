@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Necurit.Application;
-using Necurit.Application.Data.Request;
-using Necurit.Application.Data.Service;
+using Necruit.Application.Request;
+using Necruit.Application.Service;
+using Necruit.Application.Service.Jobs;
+using Serilog;
 using System.Collections.Generic;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Necruit.Server.Controllers
 {
@@ -14,14 +14,15 @@ namespace Necruit.Server.Controllers
     public class JobController : ControllerBase
     {
         private IJobService jobService;
-
-        public JobController(IJobService jobService)
+        private IDiagnosticContext diagnosticContext;
+        public JobController(IJobService jobService, IDiagnosticContext diagnosticContext)
         {
             this.jobService = jobService;
+            this.diagnosticContext = diagnosticContext;
         }
 
         [HttpGet]
-        public ServiceResult<List<JobListResponse>> Get()
+        public ServiceResult<List<JobInfo>> Get()
         {
             return jobService.ListJobs();
         }

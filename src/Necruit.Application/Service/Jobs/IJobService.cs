@@ -1,11 +1,11 @@
-﻿using Necurit.Application.Data.Request;
+﻿using Necruit.Application.Request;
 using System.Collections.Generic;
 
-namespace Necurit.Application.Data.Service
+namespace Necruit.Application.Service.Jobs
 {
     public interface IJobService
     {
         ServiceResult<int> CreateJob(CreateJobRequest request);
-        ServiceResult<List<JobListResponse>> ListJobs();
+        ServiceResult<List<JobInfo>> ListJobs();
     }
 }
