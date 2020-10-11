@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Necruit.Application.Request;
 using Necruit.Application.Service;
 using Necruit.Application.Service.Jobs;
+using Necruit.Application.Service.Jobs.Dto;
 using Serilog;
 using System.Collections.Generic;
-
 
 namespace Necruit.Server.Controllers
 {
@@ -15,6 +14,7 @@ namespace Necruit.Server.Controllers
     {
         private IJobService jobService;
         private IDiagnosticContext diagnosticContext;
+
         public JobController(IJobService jobService, IDiagnosticContext diagnosticContext)
         {
             this.jobService = jobService;
@@ -28,9 +28,15 @@ namespace Necruit.Server.Controllers
         }
 
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult<ServiceResult> Get(int id)
         {
-            return "value";
+            var result = jobService.GetJobDetail(id);
+
+            if (result.Data == null)
+                return NotFound();
+            else
+
+                return Ok(result);
         }
 
         [HttpPost]
@@ -40,7 +46,6 @@ namespace Necruit.Server.Controllers
             var result = jobService.CreateJob(request);
 
             if (result.Success)
-
                 return CreatedAtAction("Get", new { id = result.Data }, result);
             else
 
@@ -48,8 +53,15 @@ namespace Necruit.Server.Controllers
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(int id, CreateJobRequest request)
         {
+            var result = jobService.UpdateJob(id,request);
+
+            if (result.Success)
+                return NoContent();
+            else
+
+                return NotFound();
         }
 
         [HttpDelete("{id}")]

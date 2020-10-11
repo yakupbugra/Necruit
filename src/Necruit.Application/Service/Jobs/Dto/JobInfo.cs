@@ -1,15 +1,11 @@
-﻿using AutoMapper.Configuration.Conventions;
+﻿using Necruit.Application.Mapping;
 using Necruit.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Necruit.Application.Mapping;
 
-namespace Necruit.Application.Request
+namespace Necruit.Application.Service.Jobs.Dto
 {
-    public class JobInfo: MapFrom<Job>
+    public class JobInfo : MapFrom<Job>
     {
-
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Definition { get; set; }
         public int Quantity { get; set; }

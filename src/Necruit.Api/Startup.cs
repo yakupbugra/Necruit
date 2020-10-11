@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Necruit.Api.Configuration;
 using Necruit.Application.IOC;
+using Necruit.Application.Service;
 using Serilog;
 
 namespace Necruit.Api
@@ -45,7 +48,26 @@ namespace Necruit.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Necruit.Api v1"));
             }
+            app.UseExceptionHandler(config =>
+            {
+                config.Run(async context =>
+                {
+                    context.Response.StatusCode = 500;
+                    context.Response.ContentType = "application/json";
+                    var error = context.Features.Get<IExceptionHandlerFeature>();
+                    if (error != null)
+                    {
+                        var ex = error.Error;
+                        await context.Response.WriteAsync(new ServiceResult()
+                        {
+                            Success = false,
+                            Message = ex.Message
+                        }.ToString()); //ToString() is overridden to Serialize object
 
+                    }
+                });
+
+            });
             app.UseMiddleware<CorrelationMiddleware>();
             //app.UseSerilogRequestLogging();
 

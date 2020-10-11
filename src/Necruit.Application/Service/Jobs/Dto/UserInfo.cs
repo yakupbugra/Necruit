@@ -1,10 +1,7 @@
-﻿using Necruit.Domain.Entities;
-using Necruit.Application.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Necruit.Application.Mapping;
+using Necruit.Domain.Entities;
 
-namespace Necruit.Application.Request
+namespace Necruit.Application.Service.Jobs.Dto
 {
     public class UserInfo : MapFrom<User>
     {
