@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Necruit.Application.Service.Jobs;
 using Necruit.Infrastructure.Persistence.Configurations;
 using Necruit.Infrastructure.Persistence.Repository;
-using Necruit.Application.Service.Jobs;
 using System.Reflection;
 
 namespace Necruit.Application.IOC

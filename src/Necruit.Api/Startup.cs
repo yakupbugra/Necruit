@@ -9,7 +9,6 @@ using Microsoft.OpenApi.Models;
 using Necruit.Api.Configuration;
 using Necruit.Application.IOC;
 using Necruit.Application.Service;
-using Serilog;
 
 namespace Necruit.Api
 {
@@ -22,13 +21,14 @@ namespace Necruit.Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddJsonOptions(jsonOptions =>
-            {
-                jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;//JsonNamingPolicy.CamelCase;
-            });
+            services.AddControllers()
+                .AddJsonOptions(jsonOptions =>
+                {
+                    jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;//JsonNamingPolicy.CamelCase;
+                });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Necruit.Api", Version = "v1" });
@@ -39,7 +39,6 @@ namespace Necruit.Api
             services.AddServices(Configuration);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -48,26 +47,27 @@ namespace Necruit.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Necruit.Api v1"));
             }
-            app.UseExceptionHandler(config =>
+            else
             {
-                config.Run(async context =>
+                app.UseExceptionHandler(config =>
                 {
-                    context.Response.StatusCode = 500;
-                    context.Response.ContentType = "application/json";
-                    var error = context.Features.Get<IExceptionHandlerFeature>();
-                    if (error != null)
+                    config.Run(async context =>
                     {
-                        var ex = error.Error;
-                        await context.Response.WriteAsync(new ServiceResult()
+                        context.Response.StatusCode = 500;
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
+                        if (error != null)
                         {
-                            Success = false,
-                            Message = ex.Message
-                        }.ToString()); //ToString() is overridden to Serialize object
-
-                    }
+                            var ex = error.Error;
+                            await context.Response.WriteAsync(new ServiceResult()
+                            {
+                                Success = false,
+                                Message = ex.Message
+                            }.ToString()); //ToString() is overridden to Serialize object
+                        }
+                    });
                 });
+            }
 
-            });
             app.UseMiddleware<CorrelationMiddleware>();
             //app.UseSerilogRequestLogging();
 

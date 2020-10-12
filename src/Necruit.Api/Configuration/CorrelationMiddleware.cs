@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Serilog.Context;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Necruit.Api.Configuration
@@ -23,9 +21,7 @@ namespace Necruit.Api.Configuration
 
             context.Request?.Headers.Add(CorrelationHeaderKey, correlationId.ToString());
             LogContext.PushProperty("CorrelationId", correlationId);
-            
-               
-            
+
             await _next.Invoke(context);
         }
     }

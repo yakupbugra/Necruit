@@ -9,11 +9,14 @@ namespace Necruit.Application.Service.Jobs.Dto
         [Required]
         [MaxLength(250)]
         public string Title { get; set; }
+
         [Required]
         [MaxLength(4000)]
         public string Definition { get; set; }
+
         [Required]
         public int Quantity { get; set; }
+
         [Required]
         public int UserId { get; set; }
     }

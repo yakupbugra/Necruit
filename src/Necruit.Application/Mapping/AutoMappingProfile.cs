@@ -5,9 +5,9 @@ using System.Reflection;
 
 namespace Necruit.Application.Mapping
 {
-    public class MappingProfile : Profile
+    public class AutoMappingProfile : Profile
     {
-        public MappingProfile()
+        public AutoMappingProfile()
         {
             ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
         }
@@ -15,7 +15,7 @@ namespace Necruit.Application.Mapping
         private void ApplyMappingsFromAssembly(Assembly assembly)
         {
             var types = assembly.GetExportedTypes()
-                .Where(x => x.IsClass && !x.IsAbstract && (x.IsInheritedFrom(typeof(MapFrom<>)) || x.IsInheritedFrom(typeof(MapTo<>)) || x.IsInheritedFrom(typeof(MapTo<>))))
+                .Where(x => x.IsClass && !x.IsAbstract && (x.IsInheritedFrom(typeof(MapFrom<>)) || x.IsInheritedFrom(typeof(MapTo<>))))
                 .ToList();
 
             var types2 = assembly.GetExportedTypes()

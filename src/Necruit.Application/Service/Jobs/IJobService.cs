@@ -8,7 +8,9 @@ namespace Necruit.Application.Service.Jobs
         ServiceResult<int> CreateJob(CreateJobRequest request);
 
         ServiceResult<List<JobInfo>> ListJobs();
+
         ServiceResult<JobInfo> GetJobDetail(int id);
+
         ServiceResult<int> UpdateJob(int id, CreateJobRequest request);
     }
 }
