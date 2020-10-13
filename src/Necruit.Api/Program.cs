@@ -35,7 +35,7 @@ namespace Necruit.Api
           .MinimumLevel.Override("System", LogEventLevel.Warning)
                 .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
           .Enrich.FromLogContext()
-          .WriteTo.Console(outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level}] {CorrelationId} - {Message}{NewLine}{Exception}")
+          .WriteTo.Console(outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level}] CorrelationId: {CorrelationId} ({SourceContext})- {Message}{NewLine}{Exception}")
           .CreateLogger();
 
             try

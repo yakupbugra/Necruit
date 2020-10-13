@@ -1,16 +1,17 @@
 ﻿using Necruit.Application.Service.Jobs.Dto;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Necruit.Application.Service.Jobs
 {
     public interface IJobService
     {
-        ServiceResult<int> CreateJob(CreateJobRequest request);
+        Task<int> CreateJob(CreateJobRequest request);
 
-        ServiceResult<List<JobInfo>> ListJobs();
+        Task<List<JobInfo>> ListJobs();
 
-        ServiceResult<JobInfo> GetJobDetail(int id);
+        Task<JobInfo> GetJobDetail(int id);
 
-        ServiceResult<int> UpdateJob(int id, CreateJobRequest request);
+        Task<int> UpdateJob(int id, CreateJobRequest request);
     }
 }

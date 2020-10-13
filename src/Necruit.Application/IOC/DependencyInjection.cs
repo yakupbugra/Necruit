@@ -14,12 +14,11 @@ namespace Necruit.Application.IOC
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<NecruitDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("NecruitConnection"),
-            b => b.MigrationsAssembly(typeof(NecruitDbContext).Assembly.FullName)));
+                options.UseSqlServer(configuration.GetConnectionString("NecruitConnection"), b => b.MigrationsAssembly(typeof(NecruitDbContext).Assembly.FullName))
+            );
 
             services.AddScoped<DbContext>(provider => provider.GetService<NecruitDbContext>());
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-
             return services;
         }
 

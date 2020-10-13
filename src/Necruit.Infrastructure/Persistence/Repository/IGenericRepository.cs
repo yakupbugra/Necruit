@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Necruit.Infrastructure.Persistence.Repository
 {
@@ -23,5 +24,7 @@ namespace Necruit.Infrastructure.Persistence.Repository
         void Delete(object id);
 
         void Save();
+
+        Task SaveAsync();
     }
 }

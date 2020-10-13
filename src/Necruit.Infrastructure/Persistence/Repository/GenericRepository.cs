@@ -3,13 +3,13 @@ using Necruit.Domain.Entities;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Necruit.Infrastructure.Persistence.Repository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : Entity
     {
         public DbContext Context;
-
         private DbSet<T> dbSet;
 
         public GenericRepository(DbContext context)
@@ -61,9 +61,14 @@ namespace Necruit.Infrastructure.Persistence.Repository
             Context.SaveChanges();
         }
 
+        public async Task SaveAsync()
+        {
+            await Context.SaveChangesAsync();
+        }
+
         public IQueryable<T> FindActivesBy(Expression<Func<T, bool>> filter)
         {
-            throw new NotImplementedException();
+            return this.FindBy(x => x.IsActive).Where(filter);
         }
     }
 }

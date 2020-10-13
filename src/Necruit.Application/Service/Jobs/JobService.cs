@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Necruit.Application.Exceptions;
 using Necruit.Application.Service.Jobs.Dto;
@@ -7,7 +8,7 @@ using Necruit.Domain.Entities;
 using Necruit.Infrastructure.Persistence.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace Necruit.Application.Service.Jobs
 {
@@ -28,69 +29,44 @@ namespace Necruit.Application.Service.Jobs
             this.mapper = mapper;
         }
 
-        public ServiceResult<int> CreateJob(CreateJobRequest request)
+        public async Task<int> CreateJob(CreateJobRequest request)
         {
-            ServiceResult<int> result = new ServiceResult<int>();
+            Job job = mapper.Map<Job>(request);
+            job.User = userRepository.FindById(request.UserId);
+            jobRepository.Add(job);
+            await jobRepository.SaveAsync();
 
+            return job.Id;
+        }
+
+        public async Task<JobInfo> GetJobDetail(int id)
+        {
             try
             {
-                Job job = mapper.Map<Job>(request);
-                job.User = userRepository.FindById(request.UserId);
-                jobRepository.Add(job);
-                jobRepository.Save();
-
-                result.Data = job.Id;
+                return await jobRepository.FindBy(x => x.Id == id).ProjectTo<JobInfo>(mapper.ConfigurationProvider).FirstOrDefaultAsync();
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex, ex.Message);
-                result.Fail(ex);
+                throw new ServiceException();
             }
-
-            return result;
         }
 
-        public ServiceResult<JobInfo> GetJobDetail(int id)
+        public async Task<List<JobInfo>> ListJobs()
         {
-            ServiceResult<JobInfo> result = new();
             try
             {
-                JobInfo job = jobRepository.FindBy(x => x.Id == id).ProjectTo<JobInfo>(mapper.ConfigurationProvider).FirstOrDefault();
-                if (job == null)
-                    throw new NotFoundException($"Job {id} not found.");
-                result.Data = job;
-                return result;
+                return await jobRepository.AllActives().ProjectTo<JobInfo>(mapper.ConfigurationProvider).ToListAsync();
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex, ex.Message);
-                result.Fail(ex);
+                throw new ServiceException();
             }
-
-            return result;
         }
 
-        public ServiceResult<List<JobInfo>> ListJobs()
+        public async Task<int> UpdateJob(int id, CreateJobRequest request)
         {
-            ServiceResult<List<JobInfo>> result = new ServiceResult<List<JobInfo>>();
-
-            try
-            {
-                result.Data = jobRepository.AllActives().ProjectTo<JobInfo>(mapper.ConfigurationProvider).ToList();
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError(ex, ex.Message);
-                result.Fail(ex);
-            }
-
-            return result;
-        }
-
-        public ServiceResult<int> UpdateJob(int id, CreateJobRequest request)
-        {
-            ServiceResult<int> result = new ServiceResult<int>();
-
             try
             {
                 Job job = jobRepository.FindById(id);
@@ -98,17 +74,15 @@ namespace Necruit.Application.Service.Jobs
                 job = mapper.Map<CreateJobRequest, Job>(request, job);
 
                 jobRepository.Update(job);
-                jobRepository.Save();
+                await jobRepository.SaveAsync();
 
-                result.Data = job.Id;
+                return job.Id;
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex, ex.Message);
-                result.Fail(ex);
+                throw new ServiceException();
             }
-
-            return result;
         }
     }
 }

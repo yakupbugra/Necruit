@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Necruit.Application.Service;
 using Necruit.Application.Service.Jobs;
 using Necruit.Application.Service.Jobs.Dto;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Necruit.Server.Controllers
 {
@@ -19,17 +19,17 @@ namespace Necruit.Server.Controllers
         }
 
         [HttpGet]
-        public ServiceResult<List<JobInfo>> Get()
+        public async Task<ActionResult<List<JobInfo>>> GetJobs()
         {
-            return jobService.ListJobs();
+            return Ok(await jobService.ListJobs());
         }
 
         [HttpGet("{id}")]
-        public ActionResult<ServiceResult> Get(int id)
+        public async Task<ActionResult<JobInfo>> GetJobDetail(int id)
         {
-            var result = jobService.GetJobDetail(id);
+            var result = await jobService.GetJobDetail(id);
 
-            if (result.Data == null)
+            if (result == null)
                 return NotFound();
             else
 
@@ -38,27 +38,19 @@ namespace Necruit.Server.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public ActionResult<ServiceResult> Post(CreateJobRequest request)
+        public async Task<ActionResult<int>> Post(CreateJobRequest request)
         {
-            var result = jobService.CreateJob(request);
+            var result = await jobService.CreateJob(request);
 
-            if (result.Success)
-                return CreatedAtAction("Get", new { id = result.Data }, result);
-            else
-
-                return result;
+            return CreatedAtAction("Get", new { id = result });
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, CreateJobRequest request)
+        public async Task<ActionResult<int>> Put(int id, CreateJobRequest request)
         {
-            var result = jobService.UpdateJob(id, request);
+            var result = await jobService.UpdateJob(id, request);
 
-            if (result.Success)
-                return NoContent();
-            else
-
-                return NotFound();
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
