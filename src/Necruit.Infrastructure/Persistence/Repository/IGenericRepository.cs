@@ -5,13 +5,15 @@ using System.Threading.Tasks;
 
 namespace Necruit.Infrastructure.Persistence.Repository
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<T>
     {
         T FindById(object id);
 
         IQueryable<T> All();
 
         IQueryable<T> AllActives();
+
+        IQueryable<T> AllPassives();
 
         IQueryable<T> FindBy(Expression<Func<T, bool>> filter);
 

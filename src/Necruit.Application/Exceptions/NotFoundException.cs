@@ -4,8 +4,8 @@ namespace Necruit.Application.Exceptions
 {
     public class NotFoundException : Exception
     {
-        public NotFoundException()
-            : base()
+        public NotFoundException(int id)
+            : base($"Item not found by id{id}")
         {
         }
 

@@ -21,10 +21,10 @@ namespace Necruit.Infrastructure.Persistence.Configurations
             builder.Property(x => x.Password).IsRequired().HasMaxLength(250);
             builder.Property(x => x.Email).IsRequired().HasMaxLength(250);
 
-            builder.HasMany(x => x.InterviewFeedbacks).WithOne(x => x.User).HasForeignKey("UserId");
-            builder.HasMany(x => x.Talents).WithOne(x => x.Owner).HasForeignKey("UserId");
+            builder.HasMany(x => x.InterviewFeedbacks).WithOne(x => x.User).HasForeignKey(x => x.UserId);
+            builder.HasMany(x => x.Talents).WithOne(x => x.Owner).HasForeignKey(x => x.UserId);
             builder.HasMany(x => x.Interviews).WithMany(x => x.Users);
-            builder.HasMany(x => x.Jobs).WithOne(x => x.User).HasForeignKey("UserId").IsRequired();
+            builder.HasMany(x => x.Jobs).WithOne(x => x.User).HasForeignKey(x => x.UserId).IsRequired();
         }
     }
 }

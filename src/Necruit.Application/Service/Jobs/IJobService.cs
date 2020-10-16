@@ -1,17 +1,21 @@
-﻿using Necruit.Application.Service.Jobs.Dto;
-using System.Collections.Generic;
+﻿using Necruit.Api.Filters;
+using Necruit.Application.Service.Jobs.Dto;
 using System.Threading.Tasks;
 
 namespace Necruit.Application.Service.Jobs
 {
     public interface IJobService
     {
-        Task<int> CreateJob(CreateJobRequest request);
+        Task<int> Create(CreateJobRequest request);
 
-        Task<List<JobInfo>> ListJobs();
+        Task<int> Update(int id, CreateJobRequest request);
 
-        Task<JobInfo> GetJobDetail(int id);
+        Task Delete(int id);
 
-        Task<int> UpdateJob(int id, CreateJobRequest request);
+        Task<JobInfo> GetDetail(int id);
+
+        Task<PagedResult<JobInfo>> GetActives(PageRequest request);
+
+        Task<PagedResult<JobInfo>> GetPassives(PageRequest request);
     }
 }

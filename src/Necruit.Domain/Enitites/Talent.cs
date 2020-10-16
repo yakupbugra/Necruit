@@ -19,6 +19,7 @@ namespace Necruit.Domain.Entities
         public string Cv { get; set; }
         public string Description { get; set; }
         public bool IsInPool { get; set; }
+        public int UserId { get; set; }
         public User Owner { get; set; }
         public ICollection<Recruitment> Recruitments { get; set; }
     }

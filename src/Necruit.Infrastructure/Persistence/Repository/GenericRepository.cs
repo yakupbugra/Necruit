@@ -34,6 +34,11 @@ namespace Necruit.Infrastructure.Persistence.Repository
             return FindBy(x => x.IsActive);
         }
 
+        public IQueryable<T> AllPassives()
+        {
+            return FindBy(x => !x.IsActive);
+        }
+
         public IQueryable<T> FindBy(Expression<Func<T, bool>> filter)
         {
             IQueryable<T> query = dbSet.Where(filter);

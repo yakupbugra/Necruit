@@ -8,6 +8,8 @@ namespace Necruit.Domain.Entities
         {
         }
 
+        public int UserId { get; set; }
+
         public User User { get; set; }
         public string Comment { get; set; }
         public InterviewRating Rating { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Necruit.Application.Service
 {
@@ -39,5 +40,24 @@ namespace Necruit.Application.Service
         }
 
         public T Data { get; set; }
+    }
+
+    public class PagedResult<T>
+    {
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
+        public int TotalPages { get; set; }
+        public int TotalRecords { get; set; }
+        public List<T> Data { get; set; }
+        public string NextPage { get; set; }
+
+        public PagedResult(List<T> data, int pageNumber, int pageSize, int count)
+        {
+            this.PageNumber = pageNumber;
+            this.PageSize = pageSize;
+            this.Data = data;
+            this.TotalRecords = count;
+            this.TotalPages = Convert.ToInt32(Math.Ceiling((double)count / (double)pageSize));
+        }
     }
 }
