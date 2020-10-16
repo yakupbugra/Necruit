@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Necruit.Server.Controllers
 {
-    [Route("api/job")]
+    [Route("api/jobs")]
     [ApiController]
     public class JobsController : ControllerBase
     {
