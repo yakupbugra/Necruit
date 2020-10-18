@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Necruit.Application.Service
 {
-    public abstract class CrudService<TEntity, TCreate, TUpdate, TDetail, TList> : ServiceBase
+    public abstract class CrudService<TEntity, TCreate, TUpdate, TDetail, TList, TPatch> : ServiceBase
         where TEntity : Entity
         where TCreate : MapTo<TEntity>
         where TUpdate : MapTo<TEntity>
@@ -23,7 +23,7 @@ namespace Necruit.Application.Service
         private IMapper mapper;
 
         public CrudService(
-            ILogger<CrudService<TEntity, TCreate, TUpdate, TDetail, TList>> Logger,
+            ILogger<CrudService<TEntity, TCreate, TUpdate, TDetail, TList, TPatch>> Logger,
             IGenericRepository<TEntity> jobRepository,
             IMapper mapper) : base(Logger)
         {
@@ -46,6 +46,9 @@ namespace Necruit.Application.Service
             try
             {
                 TEntity entity = repository.FindById(id);
+                if (entity == null)
+
+                    return 0;
 
                 var entiy = mapper.Map<TUpdate, TEntity>(request, entity);
 
@@ -120,6 +123,22 @@ namespace Necruit.Application.Service
                 var count = await repository.AllPassives().CountAsync();
 
                 return new PagedResult<TList>(pagedData, request.PageNumber, request.PageSize, count);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, ex.Message);
+                throw new ServiceException();
+            }
+        }
+
+        public virtual async Task Patch(int id, TPatch request)
+        {
+            try
+            {
+                TEntity job = repository.FindById(id);
+                mapper.Map<TPatch, TEntity>(request, job);
+                repository.Update(job);
+                await repository.SaveAsync();
             }
             catch (Exception ex)
             {

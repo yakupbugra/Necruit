@@ -1,15 +1,22 @@
 ﻿using Necruit.Application.Mapping;
 using Necruit.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace Necruit.Application.Service.Jobs.Dto
 {
-    public class JobInfo : MapFrom<Job>
+    public class CreateUpdateJobDto : MapTo<Job>
     {
-        public int Id { get; set; }
+        [Required]
+        [MaxLength(250)]
         public string Title { get; set; }
+
+        [MaxLength(4000)]
         public string Definition { get; set; }
+
+        [Required]
         public int Quantity { get; set; }
-        public UserInfo User { get; set; }
-        public int RecruitmentCount { get; set; }
+
+        [Required]
+        public int UserId { get; set; }
     }
 }

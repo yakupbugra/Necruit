@@ -6,16 +6,18 @@ namespace Necruit.Application.Service.Jobs
 {
     public interface IJobService
     {
-        Task<int> Create(CreateJobRequest request);
+        Task<int> Create(CreateUpdateJobDto request);
 
-        Task<int> Update(int id, CreateJobRequest request);
+        Task<int> Update(int id, CreateUpdateJobDto request);
 
         Task Delete(int id);
 
-        Task<JobInfo> GetDetail(int id);
+        Task<JobDto> GetDetail(int id);
 
-        Task<PagedResult<JobInfo>> GetActives(PageRequest request);
+        Task<PagedResult<JobDto>> GetActives(PageRequest request);
 
-        Task<PagedResult<JobInfo>> GetPassives(PageRequest request);
+        Task<PagedResult<JobDto>> GetPassives(PageRequest request);
+
+        Task Patch(int id, JobDto request);
     }
 }
