@@ -1,9 +1,9 @@
-﻿using AutoMapper.Configuration;
+﻿using AutoMapper;
 
 namespace Necruit.Application.Mapping
 {
     public interface IHaveCustomMappings
     {
-        public void CreateMapping(IConfiguration configuration);
+        void CreateMapping(Profile profile);
     }
 }

@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Necruit.Api.Filters;
 using Necruit.Application.Exceptions;
-using Necruit.Application.Mapping;
-using Necruit.Domain.Entities;
 using Necruit.Infrastructure.Persistence.Repository;
 using System;
 using System.Linq;
@@ -14,11 +12,10 @@ using System.Threading.Tasks;
 namespace Necruit.Application.Service
 {
     public abstract class CrudService<TEntity, TCreate, TUpdate, TDetail, TList, TPatch> : ServiceBase
-        where TEntity : Entity
-        where TCreate : MapTo<TEntity>
-        where TUpdate : MapTo<TEntity>
-        where TDetail : MapFrom<TEntity>
-        where TPatch : MapFromTo<TDetail,TEntity>
+    //where TEntity : Entity
+    //where TCreate : MapTo<TEntity>
+    //where TUpdate : MapTo<TEntity>
+    //where TPatch : MapFromTo<TDetail,TEntity>
     {
         private IGenericRepository<TEntity> repository;
         private IMapper mapper;

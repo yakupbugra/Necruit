@@ -22,7 +22,7 @@ namespace Necruit.Application.Mapping
                 .ToList();
 
             var types2 = assembly.GetExportedTypes()
-                .Where(t => t.GetInterfaces().Any(i => i.GetType() == typeof(IHaveCustomMappings)))
+                .Where(t => t.GetInterfaces().Any(i => i.GetTypeInfo() == typeof(IHaveCustomMappings)))
                 .ToList();
 
             foreach (var type in types)

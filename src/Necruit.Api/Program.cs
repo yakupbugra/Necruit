@@ -31,7 +31,7 @@ namespace Necruit.Api
 
             Log.Logger = new LoggerConfiguration()
           .MinimumLevel.Information()
-          .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
+          .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Information)
           .MinimumLevel.Override("System", LogEventLevel.Warning)
                 .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
           .Enrich.FromLogContext()
