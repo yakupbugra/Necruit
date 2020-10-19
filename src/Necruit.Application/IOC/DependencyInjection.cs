@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Necruit.Application.Service.Jobs;
+using Necruit.Application.Service.Talents;
 using Necruit.Infrastructure.Persistence.Configurations;
 using Necruit.Infrastructure.Persistence.Repository;
 using System.Reflection;
@@ -26,6 +27,7 @@ namespace Necruit.Application.IOC
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddScoped<IJobService, JobService>();
+            services.AddScoped<ITalentService, TalentService>();
 
             return services;
         }

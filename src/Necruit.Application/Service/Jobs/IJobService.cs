@@ -1,5 +1,4 @@
-﻿using Necruit.Api.Filters;
-using Necruit.Application.Service.Jobs.Dto;
+﻿using Necruit.Application.Service.Jobs.Dto;
 using System.Threading.Tasks;
 
 namespace Necruit.Application.Service.Jobs

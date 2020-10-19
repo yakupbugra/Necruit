@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Necruit.Api.Common;
-using Necruit.Api.Filters;
+using Necruit.Application;
 using Necruit.Application.Service.Jobs;
 using Necruit.Application.Service.Jobs.Dto;
 using System.Collections.Generic;
@@ -25,7 +25,7 @@ namespace Necruit.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<JobDetailDto>>> GetJobs([FromQuery] PageQuery filter)
+        public async Task<ActionResult<List<JobDetailDto>>> GetAll([FromQuery] PageQuery filter)
         {
             var query = new PageRequest(filter.PageNumber, filter.PageSize);
             var result = await jobService.GetActives(query);
@@ -33,7 +33,7 @@ namespace Necruit.Server.Controllers
         }
 
         [HttpGet("passive")]
-        public async Task<ActionResult<List<JobDetailDto>>> GetAllJobs([FromQuery] PageQuery filter)
+        public async Task<ActionResult<List<JobDetailDto>>> GetActices([FromQuery] PageQuery filter)
         {
             var query = new PageRequest(filter.PageNumber, filter.PageSize);
             var result = await jobService.GetPassives(query);

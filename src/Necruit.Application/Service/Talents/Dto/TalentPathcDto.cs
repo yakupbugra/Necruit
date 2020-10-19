@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Necruit.Application.Mapping;
+using Necruit.Domain.Entities;
 
-namespace Necruit.Domain.Entities
+namespace Necruit.Application.Service.Talents.Dto
 {
-    public class Talent : Entity
+    public class TalentPathcDto : MapFromTo<TalentDetailDto, Talent>
     {
-        public Talent() : base()
-        {
-        }
-
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
@@ -19,8 +16,5 @@ namespace Necruit.Domain.Entities
         public string Cv { get; set; }
         public string Description { get; set; }
         public bool IsInPool { get; set; }
-        public int UserId { get; set; }
-        public User Owner { get; set; }
-        public ICollection<Recruitment> Recruitments { get; set; }
     }
 }

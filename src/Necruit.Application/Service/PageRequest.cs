@@ -1,4 +1,4 @@
-﻿namespace Necruit.Api.Filters
+﻿namespace Necruit.Application
 {
     public class PageRequest
     {
