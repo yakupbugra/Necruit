@@ -6,7 +6,7 @@ using Necruit.Infrastructure.Persistence.Repository;
 
 namespace Necruit.Application.Service.Jobs
 {
-    public class JobService : CrudService<Job, CreateUpdateJobDto, CreateUpdateJobDto, JobDto, JobDto, JobPatchDto>, IJobService
+    public class JobService : CrudService<Job, CreateUpdateJobDto, CreateUpdateJobDto, JobDetailDto, JobDetailDto, JobPatchDto>, IJobService
     {
         private IGenericRepository<Job> jobRepository;
         private IMapper mapper;

@@ -15,7 +15,10 @@ namespace Necruit.Application.Mapping
         private void ApplyMappingsFromAssembly(Assembly assembly)
         {
             var types = assembly.GetExportedTypes()
-                .Where(x => x.IsClass && !x.IsAbstract && (x.IsInheritedFrom(typeof(MapFrom<>)) || x.IsInheritedFrom(typeof(MapTo<>))))
+                .Where(x => x.IsClass
+                && !x.IsAbstract && (x.IsInheritedFrom(typeof(MapFrom<>))
+                || x.IsInheritedFrom(typeof(MapTo<>))
+                || x.IsInheritedFrom(typeof(MapFromTo<,>))))
                 .ToList();
 
             var types2 = assembly.GetExportedTypes()

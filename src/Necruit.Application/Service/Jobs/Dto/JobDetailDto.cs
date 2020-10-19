@@ -3,7 +3,7 @@ using Necruit.Domain.Entities;
 
 namespace Necruit.Application.Service.Jobs.Dto
 {
-    public class JobDto : MapFromTo<Job>
+    public class JobDetailDto : MapFrom<Job>
     {
         public int Id { get; set; }
         public string Title { get; set; }

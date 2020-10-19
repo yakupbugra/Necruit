@@ -18,6 +18,7 @@ namespace Necruit.Application.Service
         where TCreate : MapTo<TEntity>
         where TUpdate : MapTo<TEntity>
         where TDetail : MapFrom<TEntity>
+        where TPatch : MapFromTo<TDetail,TEntity>
     {
         private IGenericRepository<TEntity> repository;
         private IMapper mapper;

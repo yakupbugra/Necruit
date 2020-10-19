@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Necruit.Api.Common;
@@ -15,14 +16,16 @@ namespace Necruit.Server.Controllers
     public class JobsController : ControllerBase
     {
         private IJobService jobService;
+        private IMapper mapper;
 
-        public JobsController(IJobService jobService)
+        public JobsController(IJobService jobService, IMapper mapper)
         {
             this.jobService = jobService;
+            this.mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<JobDto>>> GetJobs([FromQuery] PageQuery filter)
+        public async Task<ActionResult<List<JobDetailDto>>> GetJobs([FromQuery] PageQuery filter)
         {
             var query = new PageRequest(filter.PageNumber, filter.PageSize);
             var result = await jobService.GetActives(query);
@@ -30,7 +33,7 @@ namespace Necruit.Server.Controllers
         }
 
         [HttpGet("passive")]
-        public async Task<ActionResult<List<JobDto>>> GetAllJobs([FromQuery] PageQuery filter)
+        public async Task<ActionResult<List<JobDetailDto>>> GetAllJobs([FromQuery] PageQuery filter)
         {
             var query = new PageRequest(filter.PageNumber, filter.PageSize);
             var result = await jobService.GetPassives(query);
@@ -38,7 +41,7 @@ namespace Necruit.Server.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<JobDto>> GetJobDetail(int id)
+        public async Task<ActionResult<JobDetailDto>> GetJobDetail(int id)
         {
             var result = await jobService.GetDetail(id);
 
@@ -75,14 +78,16 @@ namespace Necruit.Server.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<ActionResult<int>> Pathc(int id, JsonPatchDocument<JobDto> request)
+        public async Task<ActionResult<int>> Pathc(int id, [FromBody] JsonPatchDocument<JobPatchDto> request)
         {
-            JobDto job = await jobService.GetDetail(id);
+            JobDetailDto job = await jobService.GetDetail(id);
             if (job == null)
                 return NotFound();
-            request.ApplyTo(job);
 
-            await jobService.Patch(id, job);
+            var jobPatch = mapper.Map<JobPatchDto>(job);
+            request.ApplyTo(jobPatch);
+
+            await jobService.Patch(id, jobPatch);
 
             return NoContent();
         }

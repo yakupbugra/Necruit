@@ -12,12 +12,12 @@ namespace Necruit.Application.Service.Jobs
 
         Task Delete(int id);
 
-        Task<JobDto> GetDetail(int id);
+        Task<JobDetailDto> GetDetail(int id);
 
-        Task<PagedResult<JobDto>> GetActives(PageRequest request);
+        Task<PagedResult<JobDetailDto>> GetActives(PageRequest request);
 
-        Task<PagedResult<JobDto>> GetPassives(PageRequest request);
+        Task<PagedResult<JobDetailDto>> GetPassives(PageRequest request);
 
-        Task Patch(int id, JobDto request);
+        Task Patch(int id, JobPatchDto request);
     }
 }

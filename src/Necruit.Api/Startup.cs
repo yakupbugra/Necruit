@@ -20,11 +20,11 @@ namespace Necruit.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers()
-                .AddJsonOptions(jsonOptions =>
-                {
-                    jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;//JsonNamingPolicy.CamelCase;
-                });
+            services.AddControllers().AddNewtonsoftJson();
+            //.AddJsonOptions(jsonOptions =>
+            //{
+            //    jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;//JsonNamingPolicy.CamelCase;
+            //});
 
             services.AddSwaggerGen(c =>
             {
